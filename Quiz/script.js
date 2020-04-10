@@ -72,7 +72,7 @@ function processarResposta() {
     var resposta = 0
     respostas.forEach((e) => {
         if (e.checked == true) {
-            resposta = e
+            resposta = e.value
         }
     })
 
