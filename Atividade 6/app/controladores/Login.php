@@ -4,18 +4,19 @@ require 'app/modelos/Usuario.php';
 require 'Controlador.php';
 
 /**
-* ???? Descreva detalhadamente o que essa classe faz ????
+* responsavel por controlar loguin
 */
 class LoginController extends Controller  {
     
     /**
-    * ?????
-    * @var Usuario ????
+    * referencia ao modelo Usuario
+    * @var Usuario
     */
     private $loggedUser;
     
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    * construtor da classe
+    *  inicia a sessão e atribui o loggedUser ao campo user da sessssão
     */
     function __construct() {
         session_start();
@@ -23,7 +24,14 @@ class LoginController extends Controller  {
     }
     
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    * função que lida com o loguin
+    * caso a requisição seja do tipo post e se o usuarios estiver setado na sessão 
+    * percorre todos os usuários reguistrados e caso encontre uma correlação [email, selha] passados com [email, senha] de um usuário registrado
+    * efetua o loguin passando o usuario da sessão para o loggedUser
+    * caso não ache correlações [email, senha]:
+    * envia informações e mensagem de erro
+    * caso a requisição não seja do tipo post 
+    * redireciona para a view de login
     */
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -51,7 +59,12 @@ class LoginController extends Controller  {
     }
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    * caso a requisição seja do tipo post e o campo users não esteja setado
+    * seta users como um vetor
+    * verifica se ja existe o email a ser cadastrado, caso exista emite uma mensagem de erro
+    * caso o email seja unico 
+    * adiciona novo usuario a lista de usuarios
+    * manda mensagem de sucesso
     */
     public function cadastrar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -74,7 +87,9 @@ class LoginController extends Controller  {
     }
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    * ao ser chama essa função verifica pela pela variavel loggedUser
+    * caso ela esteja vasia emite um alerta dezendo que deve ser feito o login antes de receber informações
+    * caso o usuario esteja logado ele é redirecionado para a pag de informações passando as informações de qual usuario está logado
     */
     public function info() {
         if (!$this->loggedUser) {
@@ -85,7 +100,9 @@ class LoginController extends Controller  {
     }
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    * ao ser chama essa função verifica pela pela variavel loggedUser
+    * caso ela esteja vasia emite um alerta dezendo que deve ser feito o login antes de sair
+    * caso o usuario esteja logado é apagado da sessão o usuario que está logado
     */
     public function sair() {
         if (!$this->loggedUser) {

@@ -1,30 +1,30 @@
 <?php
 
 /**
-* ???? Descreva detalhadamente o que essa classe faz ????
+* ???? Descreva detalhadamente o que essa classe faz 
 */
 class Usuario {
 
     /**
-    * ?????
-    * @var string ????
+    * referencia ao tipo string
+    * @var string
     */
     private $email;
 
     /**
-    * ?????
-    * @var string ????
+    * referencia ao tipo string
+    * @var string 
     */
     private $senha;
 
     /**
-    * ?????
-    * @var string ????
+    * referencia ao tipo string
+    * @var string 
     */
     private $nome;
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    *  Construtor da classe, inicia as variaveis email, senha e nome
     */
     function __construct(string $email, string $senha, string $nome) {
         $this->email = $email;
@@ -33,21 +33,21 @@ class Usuario {
     }
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    *  retormna um campo (nome, senha ou email)
     */
     public function __get($campo) {
         return $this->$campo;
     }
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    *  atribui um valor a um campo
     */
     public function __set($campo, $valor) {
         return $this->$campo = $valor;
     }
 
     /**
-    *  ???? Descreva detalhadamente o que esse método faz ????
+    *  verifica se ha um conjunto [email, senha] igual ao passado pela função
     */
     public function igual(string $email, string $senha) {
         return $this->email === $email && $this->senha === hash('sha256', $senha);
